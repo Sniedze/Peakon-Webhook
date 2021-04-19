@@ -2,14 +2,29 @@ const axios = require("axios");
 
 const postToWebhooks = async (token, payload, links) => {
   data = { payload, token };
-  console.log(links);
 
   try {
-    const res = await links.map((url) => {
-      //await axios.post(url, data);
-      console.log(url);
-    });
-    return res;
+    axios
+      .all([
+        await links.map((link) => {
+          axios({
+            method: "post",
+            url: link,
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            data,
+          });
+        }),
+      ])
+      .then(
+        axios.spread((response) => {
+          console.log("response", response);
+        })
+      );
+
+    return { success: true, body: { payload, data } };
   } catch (err) {
     return { success: false, error: err };
   }

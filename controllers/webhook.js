@@ -36,7 +36,7 @@ const triggerWebhook = async (req, res, next) => {
     const result = await webhookTriggerService(user, payload);
     return result.success === true
       ? res.status(200).send(result.body)
-      : res.status(204).send(result.err);
+      : res.status(204).send(result.error);
   } catch (err) {
     next({ status: 400, response: err });
   }

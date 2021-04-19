@@ -1,7 +1,7 @@
 const express = require("express");
-const app = express();
+const router = express();
 const webhooksRoute = require(__dirname + "/webhooks.js");
 
-app.use("/webhooks", webhooksRoute);
+router.use("/webhooks", webhooksRoute);
 
-module.exports = app;
+module.exports = router;

@@ -33,8 +33,9 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
   return knex.schema
-    .table("files", (table) => {
+    .table("webhooks", (table) => {
       table.dropForeign("user_id");
     })
-    .dropTableIfExists("users");
+    .dropTableIfExists("users")
+    .dropTableIfExists("webhooks");
 };

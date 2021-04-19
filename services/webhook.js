@@ -1,5 +1,4 @@
 const Webhook = require(__dirname + "/../models/Webhook");
-const User = require(__dirname + "/../models/User");
 const { postToWebhooks } = require(__dirname + "/../helpers/postToWebhooks");
 
 const webhookRegisterService = async (user, url) => {
@@ -16,15 +15,15 @@ const webhookRegisterService = async (user, url) => {
 };
 
 const webhookTriggerService = async (user, payload) => {
-  registredToken = "foo";
+  token = "foo";
   try {
     const userUrls = await Webhook.query()
       .select("url")
       .where("user_id", user.id);
     const links = userUrls.map((link) => link.url);
-    //console.log(payload);
-    return await postToWebhooks(token, payload, links);
-    //return { success: true, body: { payload, postedToWebhooks } };
+    //console.log(links);
+    const result = await postToWebhooks(token, payload, links);
+    return result;
   } catch (err) {
     return { success: false, error: err };
   }
