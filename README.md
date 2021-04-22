@@ -1,6 +1,6 @@
 # Peakon-Webhook
 
-This webhook server allows clients to register urls they want to receive webhooks to, trigger webhooks which porceeds with server sending post request to all client`s registred urls.
+This webhook server allows clients to register urls they want to receive webhooks to, trigger webhooks which proceeds with server sending post request to all client`s registred urls.
 
 ## Technologies
 
@@ -10,7 +10,7 @@ Express web framework provides the HTTP methods, middlewares and API setup
 
 ### Database & Model layer
 
-MySQL database is used, but you can connect with other relational databases, like Postgres, MSSQL, MariaDB, SQLite3, Oracle, and Amazon Redshift.
+I used MySQL database, but you can connect with other relational databases, like Postgres, MSSQL, MariaDB, SQLite3, Oracle, and Amazon Redshift.
 
 Knex.js SQL query builder is used to quickly create tables, migrate and seed tables with initial data.
 
@@ -35,7 +35,8 @@ Occupies tables with initial data..
 ### routes
 
 Routes forward requests to appropriate controller.
-client.js route is the client server side endpoint receiving post requests from this server. The fake url created (ngrok) uses this endpoint.
+
+'client.js' route is the client server side endpoint receiving post requests from this server. The fake url created (ngrok) uses this endpoint.
 
 ### controllers
 
@@ -72,11 +73,11 @@ In this task, I am using the token:
 Normally, user_id would be received in the request.headers or req.session, depending if JWT or session is used.
 In this assignement, user_id is provided in the req.body for the testing sakes.
 
-## How to Run an Test
+## How to Run and Test
 
 ### Installation
 
-After cloning run
+After cloning run:
 
 ```
   $ npm install or yarn install
@@ -109,7 +110,7 @@ Nodemon automatically restarts the node application when file changes in the dir
 
 Postman or other service can be used to test endpoints.
 
-## POST request to register webhooks
+#### POST request to register webhooks
 
 endpoint: `http://localhost:9876/api/webhooks`
 
@@ -128,7 +129,7 @@ To fully test this server, create a public HTTPS url for a website running local
 successful response:
 "Webhook url https://requestbin.fullcontact.com/rf385urf registred"
 
-## POST request to trigger webhooks
+#### POST request to trigger webhooks
 
 endpoint: `http://localhost:9876/api/webhooks/test`
 
