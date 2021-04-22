@@ -1,5 +1,4 @@
 const express = require("express");
-const ngrok = require("ngrok");
 const helmet = require("helmet");
 const { Model } = require("objection");
 const Knex = require("knex");
@@ -14,7 +13,7 @@ const port = 9876;
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(helmet()); //Provides 15 security middlewares.
+app.use(helmet()); //Provides ~15 security middlewares.
 Model.knex(knex);
 
 app.use("/api", apiRoutes);

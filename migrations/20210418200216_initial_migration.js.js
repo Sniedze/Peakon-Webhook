@@ -16,6 +16,7 @@ exports.up = function (knex) {
     .createTable("webhooks", (table) => {
       table.increments("id");
       table.string("url").notNullable();
+      table.string("token").notNullable();
       table.integer("user_id").unsigned().notNullable();
       table
         .foreign("user_id")

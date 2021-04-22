@@ -2,11 +2,10 @@ const express = require("express");
 const router = express();
 
 router.post("/", async (req, res, next) => {
-  const { token, payload } = req.body;
   try {
-    return res.status(200).send(token);
+    return res.status(200).send({ response: "Data updated" });
   } catch (err) {
-    next({ status: 400, response: "Failed to create a movie" });
+    next({ status: 400, response: "Failed to receive webhooks" });
   }
 });
 

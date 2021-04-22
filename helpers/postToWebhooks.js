@@ -1,32 +1,22 @@
 const axios = require("axios");
+const { response } = require("../routes/client");
 
-const postToWebhooks = async (token, payload, links) => {
-  data = { payload, token };
-
+const postToWebhooks = async (userWebhookData) => {
+  const data = { payload: { message: "Updated info" }, token };
+  const requests = await userWebhookData.map(({ url, token }) => {
+    axios({
+      method: "post",
+      url,
+      data,
+    });
+  });
   try {
-    axios
-      .all([
-        await links.map((link) => {
-          axios({
-            method: "post",
-            url: link,
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            data,
-          });
-        }),
-      ])
-      .then(
-        axios.spread((response) => {
-          console.log("response", response);
-        })
-      );
+    const responses = await axios.all(requests);
+    const responseArray = await axios.spread(...responses);
 
-    return { success: true, body: { payload, data } };
-  } catch (err) {
-    return { success: false, error: err };
+    return { success: true, body: { response: data } };
+  } catch (error) {
+    return { success: false, error };
   }
 };
 
